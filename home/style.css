@@ -10,25 +10,23 @@
 #grid-container{
     height: 100vh;
     width: 100vw;
-    display: grid;
-    grid-template-areas: 
-        'h h h'
-        'ls m rs'
-        'f f f';
-    grid-template-columns: 1fr 8fr 1fr;
-    grid-template-rows: 1fr 2fr 8fr;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 #header{
     grid-area: h;
     display: flex;
+    font-size: 4em;
     align-items: center;
     justify-content: center;
 }
 #game{
+    gap: 2px;
     grid-area: m;
     display: flex;
     justify-content: center;
-    gap: 5px;
+    flex-direction: column;
 }
 
 .letter-box{
@@ -39,6 +37,13 @@
     justify-content: center;
     width: 100px;
     height: 100px;
+}
+
+.row{
+    display: flex;
+    justify-content: center;;
+    width: 100%;
+    gap: 2px;   
 }
 
 .letter{
@@ -53,5 +58,65 @@
 }
 
 .fully-guessed{
+    background: #32CD32;
+}
+
+.not-in-word{
+    background: rgb(200,200,200);
+}
+
+.win{
     background: green;
 }
+
+#end{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,.3);
+    transform: translate(-50%, -50%);
+}
+.hidden{
+    display: none;
+}
+
+#end-box{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vw;
+    height: 70vw;
+    background: rgba(0,0,0,.8);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#win{
+    color: white;
+    text-align: center;
+}
+
+#lose{
+    color: white;
+    text-align: center;
+}
+
+@keyframes newLetter {
+    0% {width: 100px;
+    height: 100px;}
+    50% {width: 110px;
+    height: 110px;}
+    100% {width: 100px;
+    height: 100px;}
+}
+
+.newLetterEEEEEEEEE{
+    animation: newLetter .2s;
+}
+
