@@ -5,7 +5,7 @@ const end = document.getElementById('end');
 const endWin = document.getElementById('win');
 const endLose = document.getElementById('lose');
 
-const solved = ['s', 'n', 'a', 'c', 'k'];
+const solved = ['h', 'e', 'l', 'p', 's'];
 let c = 0;
 let u = 0;
 
@@ -48,12 +48,13 @@ function keydown(keyCode){
     let correctCount = 0;
     if (key == 'Enter' && c>=5){
         let exactCount = 0;
+        let tempSolved = solved.slice();
         console.log(keyCode);
 
         for (c = 4; c >= 0; c--){
             let correct = false;
-            for (let j = 0; j < 5; j++){
-                if (arrHolder[u].childNodes[c].firstChild.innerHTML.toLowerCase() == solved[j]){
+            for (let j = 4; j >= 0; j--){
+                if (arrHolder[u].childNodes[c].firstChild.innerHTML.toLowerCase() == tempSolved[j]){
                     if (j == c){
                         arrHolder[u].childNodes[c].classList.add('fully-guessed');
                         correct = true;
@@ -62,7 +63,11 @@ function keydown(keyCode){
                         arrHolder[u].childNodes[c].classList.add('partial-guessed');
                         correct = true;
                     }
-                } 
+                    tempSolved[j]="";
+                    console.log(tempSolved);
+                    j=-1;
+                }
+                 
             }
             if (correct == false){
                 arrHolder[u].childNodes[c].classList.add('not-in-word');
@@ -109,3 +114,12 @@ function lose(){
 
 
 }
+
+/*
+function getNewWord(){
+    const listOfWords = 'radio plant faces happy farce elope';
+    const todaysWord = listOfWords.substring((Math.floor(Math.random())*6)*6, ());
+    console.log(todaysWord);
+    return ['a', 'b', 'c', 'd', 'e']
+}
+*/
