@@ -5,7 +5,7 @@ const end = document.getElementById('end');
 const endWin = document.getElementById('win');
 const endLose = document.getElementById('lose');
 
-const solved = ['h', 'e', 'l', 'p', 's'];
+const solved = getNewWord();
 let c = 0;
 let u = 0;
 
@@ -115,11 +115,17 @@ function lose(){
 
 }
 
-/*
+
 function getNewWord(){
-    const listOfWords = 'radio plant faces happy farce elope';
-    const todaysWord = listOfWords.substring((Math.floor(Math.random())*6)*6, ());
-    console.log(todaysWord);
-    return ['a', 'b', 'c', 'd', 'e']
+    const date = new Date();
+    const wordBank = [
+        ['smoke', 'earth', 'milks', 'crate', 'worms', 'edict', 'jumby', 'zilch', 'jumpy', 'fazed', 'elope', 'jacks', 'gauzy', 'kyack', 'alone', 'arise', 'badly', 'audit', 'baker', 'award', 'awake', 'aware', 'block', 'bench', 'break', 'brief', 'build', 'child', 'chase']
+    ]
+    const wordOfTheDay = wordBank[0][date.getDate()-1];
+    console.log(wordOfTheDay);
+    const returnedArray = [];
+    for (let index = 0; index < 5; index++){
+        returnedArray.push(wordOfTheDay.charAt(index));
+    }
+    return returnedArray;
 }
-*/
