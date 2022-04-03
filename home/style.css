@@ -4,10 +4,10 @@
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.grid-container{
-    background: url('explosion.mp4');
-}
+
 #grid-container{
+    background: rgb(240,240,240);
+    z-index: -1;
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -15,15 +15,14 @@
     justify-content: space-around;
 }
 #header{
-    grid-area: h;
     display: flex;
     font-size: 4em;
     align-items: center;
     justify-content: center;
 }
 #game{
+    padding: 10px;
     gap: 2px;
-    grid-area: m;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -35,8 +34,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
 }
 
 .row{
@@ -48,7 +47,7 @@
 
 .letter{
 
-    font-size: 3em;
+    font-size: 2em;
     justify-content: center;
     align-items: center;
 }
@@ -83,6 +82,7 @@
 }
 
 #end-box{
+    z-index: 2;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -121,13 +121,37 @@
 }
 
 #background-video {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     position: fixed;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
-    z-index: -1;
+  }
+
+  #keyboard{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+  }
+
+  .rowOfKeys{
+      display: flex;
+      flex-direction: row;
+      gap: 5px;
+
+  }
+  
+  .key{
+      font-size: 2em;
+      border-radius: 5px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
   }

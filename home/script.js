@@ -4,11 +4,29 @@ const page = document.getElementById('grid-container');
 const end = document.getElementById('end');
 const endWin = document.getElementById('win');
 const endLose = document.getElementById('lose');
-
 const solved = getNewWord();
+
+//keyboard constants
+const keyboardContainer = document.getElementById('keyboard');
+const keys = [
+    ['q','w','e','r','t','y','u','i','o','p'],
+    ['a','s','d','f','g','h','j','k','l'],
+    ['z','x','c','v','b','n','m']
+];
+const keyCodes = [
+    [81, 87, 69, 82, 84, 89, 85, 73, 79, 80],
+    [65, 83, 68, 70, 71, 72, 74, 75, 76],
+    [90, 88, 67, 86, 66, 78, 77]
+];
+const keyRow = document.createElement('array');
+
+window.addEventListener('keydown', keydown);
+
 let c = 0;
 let u = 0;
 
+
+//settup blank cubes
 for (let i = 0; i < 6; i++){
     arrHolder[i] = document.createElement('div');
     arrHolder[i].classList.add('row');
@@ -20,8 +38,25 @@ for (let i = 0; i < 6; i++){
     }
     game.appendChild(arrHolder[i]);
 }
+//settup keyboard
+for (let i = 0; i < keys.length; i++){
+    keyRow[i] = document.createElement('div');
+    keyRow[i].classList.add('rowOfKeys');
+    
+    for (let j = 0; j < keys[i].length; j++){
+        const keysByRow = [];
+        keysByRow[j] = document.createElement('button');
+        keysByRow[j].classList.add('key');
+        keysByRow[j].textContent = keys[i][j];
+        keyRow[i].appendChild(keysByRow[j]);
+    }
+    keyboardContainer.appendChild(keyRow[i]);
 
-window.addEventListener('keydown', keydown);
+}
+
+const backgroundMatthew = document.getElementById('background-video');
+
+
 
 function keydown(keyCode){    
     const key = keyCode.key;
@@ -31,6 +66,7 @@ function keydown(keyCode){
     switch(true){
         case (val == 13): //enter
         case (val == 8): //backspace
+        case (val ==16):
             break;
 
         case (val < 65):
@@ -39,6 +75,9 @@ function keydown(keyCode){
     }
 
     
+    if (key == 'Shift'){
+        backgroundMatthew.classList.toggle('hidden');
+    }
 
     if (key == 'Backspace' && c>0){
         c--;
@@ -47,6 +86,7 @@ function keydown(keyCode){
 
     let correctCount = 0;
     if (key == 'Enter' && c>=5){
+        updateKeyboard();
         let exactCount = 0;
         let tempSolved = solved.slice();
         console.log(keyCode);
@@ -86,7 +126,7 @@ function keydown(keyCode){
         u++;
     }
 
-    if (key != 'Backspace' && key != 'Enter'){
+    if (key != 'Backspace' && key != 'Enter' && key != 'Shift'){
         const letter = document.createElement('h1');
         letter.classList.add('letter')
         letter.textContent=key.toUpperCase();
