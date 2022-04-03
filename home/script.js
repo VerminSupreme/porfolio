@@ -97,9 +97,12 @@ function keydown(keyCode){
                 if (arrHolder[u].childNodes[c].firstChild.innerHTML.toLowerCase() == tempSolved[j]){
                     if (j == c){
                         arrHolder[u].childNodes[c].classList.add('fully-guessed');
+                        updateKeyboard(arrHolder, u, c, 'green');
+                        console.log(arrHolder[u].childNodes[c].childNodes[0].innerHTML);
                         correct = true;
                         exactCount++;
                     }else{
+                        updateKeyboard(arrHolder, u, c, 'yellow');
                         arrHolder[u].childNodes[c].classList.add('partial-guessed');
                         correct = true;
                     }
@@ -111,6 +114,7 @@ function keydown(keyCode){
             }
             if (correct == false){
                 arrHolder[u].childNodes[c].classList.add('not-in-word');
+
             }else{
                 correctCount++;
             }
@@ -135,6 +139,11 @@ function keydown(keyCode){
 
         c++;
     }
+}
+
+function updateKeyboard(value, color){
+    console.log(value);
+    console.log(valueOfLetter);
 }
 
 function win(){
