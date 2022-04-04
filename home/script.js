@@ -61,7 +61,6 @@ const backgroundMatthew = document.getElementById('background-video');
 function keydown(keyCode){    
     const key = keyCode.key;
     const val = keyCode.keyCode;
-    console.log(val);
     
     switch(true){
         case (val == 13): //enter
@@ -86,33 +85,33 @@ function keydown(keyCode){
 
     let correctCount = 0;
     if (key == 'Enter' && c>=5){
-        updateKeyboard();
+        
         let exactCount = 0;
         let tempSolved = solved.slice();
-        console.log(keyCode);
 
         for (c = 4; c >= 0; c--){
+            let value = arrHolder[u].childNodes[c].firstChild;
             let correct = false;
             for (let j = 4; j >= 0; j--){
-                if (arrHolder[u].childNodes[c].firstChild.innerHTML.toLowerCase() == tempSolved[j]){
+                if (value == tempSolved[j]){
                     if (j == c){
                         arrHolder[u].childNodes[c].classList.add('fully-guessed');
-                        updateKeyboard(arrHolder, u, c, 'green');
-                        console.log(arrHolder[u].childNodes[c].childNodes[0].innerHTML);
+                        updateKeyboard(value, 'green');
                         correct = true;
                         exactCount++;
                     }else{
-                        updateKeyboard(arrHolder, u, c, 'yellow');
                         arrHolder[u].childNodes[c].classList.add('partial-guessed');
+                        updateKeyboard(value, 'yellow');
                         correct = true;
                     }
                     tempSolved[j]="";
-                    console.log(tempSolved);
                     j=-1;
                 }
                  
             }
             if (correct == false){
+                updateKeyboard(value, 'gray');
+
                 arrHolder[u].childNodes[c].classList.add('not-in-word');
 
             }else{
@@ -141,11 +140,6 @@ function keydown(keyCode){
     }
 }
 
-function updateKeyboard(value, color){
-    console.log(value);
-    console.log(valueOfLetter);
-}
-
 function win(){
     window.removeEventListener('keydown', keydown);
     end.classList.toggle('hidden');
@@ -164,6 +158,13 @@ function lose(){
 
 }
 
+function updateKeyboard(value, color){
+    for (let i = 0; i < keys.length; i++){
+        for (let j = 0; j < keys[i].length; j++){
+            console.log(value);
+        }
+    }
+}
 
 function getNewWord(){
     const date = new Date();
