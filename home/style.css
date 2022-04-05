@@ -145,7 +145,7 @@
   .rowOfKeys{
       display: flex;
       flex-direction: row;
-      gap: 5px;
+      gap: 2px;
 
   }
   
@@ -177,3 +177,4 @@
     display: flex;
     gap: 25vw;
 }
+

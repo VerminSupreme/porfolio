@@ -51,7 +51,7 @@ for (let i = 0; i < keys.length; i++){
         keysByRow[j].textContent = keys[i][j];
         keyRow[i].appendChild(keysByRow[j]);
 
-        keysByRow[j].addEventListener('click', (e) => {
+        keysByRow[j].addEventListener('mousedown', (e) => {
             keyIsPressed(e, keys[i][j], i, j);
         });
     }
@@ -105,11 +105,12 @@ function isValidKey(val){
 function keyboardKey(keyPressedOnKeyboard){
     const key = keyPressedOnKeyboard.key;
     const val = keyPressedOnKeyboard.keyCode;
+    console.log("keyboardKey: " + key + val);
     keyDown(key, val);
 }
 
 function keyDown(key, val){
-    console.log(key + val);
+    console.log("you clicked " + key + val);
     if (isValidKey(val) == false){
         return;
     }    
@@ -144,6 +145,7 @@ function keyDown(key, val){
 
         c++;
     }
+    console.log(1);
 }
 
 function isCorrect(){
