@@ -47,6 +47,7 @@ for (let i = 0; i < keys.length; i++){
         const keysByRow = [];
         keysByRow[j] = document.createElement('button');
         keysByRow[j].classList.add('key');
+        keysByRow[j].classList.add('letterKey');
         keysByRow[j].textContent = keys[i][j];
         keyRow[i].appendChild(keysByRow[j]);
 
@@ -58,11 +59,32 @@ for (let i = 0; i < keys.length; i++){
 
 }
 
+keyRow[3] = document.createElement('div');
+keyRow[3].classList.add('important-buttons');
+const deleteButton = document.createElement('button');
+deleteButton.classList.add('key');
+deleteButton.textContent = 'Delete';
+deleteButton.addEventListener('click', () => {
+    keyDown('Backspace', 8);
+})
+keyRow[3].appendChild(deleteButton);
+
+const enterButton = document.createElement('button');
+enterButton.classList.add('key');
+enterButton.textContent = 'Enter';
+enterButton.addEventListener('click', () => {
+    keyDown('Enter', 13);
+})
+keyRow[3].appendChild(enterButton);
+
+keyboardContainer.appendChild(keyRow[3]);
+
+
 function keyIsPressed(keyPressed, letterOfKey, i, j){
     const valueOfKeyPressed = keyPressed.target.innerHTML;
     keyDown(letterOfKey, keyCodes[i][j]);
-
 }
+
 
 const backgroundMatthew = document.getElementById('background-video');
 

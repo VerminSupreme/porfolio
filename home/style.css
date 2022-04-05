@@ -152,13 +152,15 @@
   .key{
       font-size: 2em;
       border-radius: 5px;
-      width: 40px;
-      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
   }
 
+  .letterKey{
+    width: 40px;
+    height: 40px;
+  }
   
   
 .gray{
@@ -169,4 +171,9 @@
 }
 .green{
     background: var(--green);
+}
+
+.important-buttons{
+    display: flex;
+    gap: 25vw;
 }
