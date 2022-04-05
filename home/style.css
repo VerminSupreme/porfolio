@@ -5,6 +5,12 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+:root{
+    --green: #32CD32;
+    --yellow: yellow;
+    --gray: rgb(200, 200, 200);
+}
+
 #grid-container{
     background: rgb(240,240,240);
     z-index: -1;
@@ -53,20 +59,17 @@
 }
 
 .partial-guessed{
-    background: yellow;
+    background: var(--yellow);
 }
 
 .fully-guessed{
-    background: #32CD32;
+    background: var(--green);
 }
 
 .not-in-word{
     background: rgb(200,200,200);
 }
 
-.win{
-    background: green;
-}
 
 #end{
     position: absolute;
@@ -155,3 +158,15 @@
       align-items: center;
       justify-content: center;
   }
+
+  
+  
+.gray{
+      background: var(--gray);
+  }
+.yellow{
+    background: var(--yellow);
+}
+.green{
+    background: var(--green);
+}

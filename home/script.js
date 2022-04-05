@@ -57,11 +57,7 @@ for (let i = 0; i < keys.length; i++){
 const backgroundMatthew = document.getElementById('background-video');
 
 
-
-function keydown(keyCode){    
-    const key = keyCode.key;
-    const val = keyCode.keyCode;
-    
+function isValidKey(val){
     switch(true){
         case (val == 13): //enter
         case (val == 8): //backspace
@@ -70,10 +66,18 @@ function keydown(keyCode){
 
         case (val < 65):
         case (val > 90):
-            return;
+            return false;
     }
+}
 
+function keydown(keyCode){
+    const key = keyCode.key;
+    const val = keyCode.keyCode;
     
+    if (isValidKey(val) == false){
+        return;
+    }    
+
     if (key == 'Shift'){
         backgroundMatthew.classList.toggle('hidden');
     }
@@ -83,48 +87,14 @@ function keydown(keyCode){
         arrHolder[u].children[c].textContent = '';
     }
 
-    let correctCount = 0;
     if (key == 'Enter' && c>=5){
         
-        let exactCount = 0;
-        let tempSolved = solved.slice();
 
-        for (c = 4; c >= 0; c--){
-            let value = arrHolder[u].childNodes[c].firstChild;
-            let correct = false;
-            for (let j = 4; j >= 0; j--){
-                if (value == tempSolved[j]){
-                    if (j == c){
-                        arrHolder[u].childNodes[c].classList.add('fully-guessed');
-                        updateKeyboard(value, 'green');
-                        correct = true;
-                        exactCount++;
-                    }else{
-                        arrHolder[u].childNodes[c].classList.add('partial-guessed');
-                        updateKeyboard(value, 'yellow');
-                        correct = true;
-                    }
-                    tempSolved[j]="";
-                    j=-1;
-                }
-                 
-            }
-            if (correct == false){
-                updateKeyboard(value, 'gray');
+        checkWord();
 
-                arrHolder[u].childNodes[c].classList.add('not-in-word');
-
-            }else{
-                correctCount++;
-            }
-        }
         
-        if (exactCount == 5){
-            win();
-        }
-        if (exactCount < 5 && u==5){
-            lose();
-        }
+        
+        
         c=0;
         u++;
     }
@@ -137,6 +107,51 @@ function keydown(keyCode){
         arrHolder[u].childNodes[c].classList.add('newLetter');
 
         c++;
+    }
+}
+
+function checkWord(){
+    let correctCount = 0;
+    let exactCount = 0;
+    let tempSolved = solved.slice();
+    for (c = 4; c >= 0; c--){
+        let value = arrHolder[u].childNodes[c].firstChild.innerHTML.toLowerCase();
+        let correct = false;
+        for (let j = 4; j >= 0; j--){
+            if (value == tempSolved[j]){
+                if (j == c){
+                    arrHolder[u].childNodes[c].classList.add('fully-guessed');
+                    updateKeyboard(value, 'green');
+                    correct = true;
+                    exactCount++;
+                }else{
+                    arrHolder[u].childNodes[c].classList.add('partial-guessed');
+                    updateKeyboard(value, 'yellow');
+                    correct = true;
+                }
+                tempSolved[j]="";
+                j=-1;
+            }
+             
+        }
+        if (correct == false){
+            updateKeyboard(value, 'gray');
+
+            arrHolder[u].childNodes[c].classList.add('not-in-word');
+
+        }else{
+            correctCount++;
+        }
+    }
+    checkForWin(exactCount, correctCount);
+}
+
+function checkForWin(exactCount, correctCount){
+    if (exactCount == 5){
+        win();
+    }
+    if (exactCount < 5 && u==5){
+        lose();
     }
 }
 
@@ -161,7 +176,9 @@ function lose(){
 function updateKeyboard(value, color){
     for (let i = 0; i < keys.length; i++){
         for (let j = 0; j < keys[i].length; j++){
-            console.log(value);
+            if (keys[i][j] == value){
+                keyboardContainer.childNodes[i].childNodes[j].classList.add(color);
+            }
         }
     }
 }
@@ -170,9 +187,9 @@ function getNewWord(){
     const date = new Date();
     const wordBank = [
         ['smoke', 'earth', 'milks', 'crate', 'worms', 'edict', 'jumby', 'zilch', 'jumpy', 'fazed', 'elope', 'jacks', 'gauzy', 'kyack', 'alone', 'arise', 'badly', 'audit', 'baker', 'award', 'awake', 'aware', 'block', 'bench', 'break', 'brief', 'build', 'child', 'chase']
-    ]
+    ];
     const wordOfTheDay = wordBank[0][date.getDate()-1];
-    console.log(wordOfTheDay);
+    console.log("Word of the day: " + wordOfTheDay);
     const returnedArray = [];
     for (let index = 0; index < 5; index++){
         returnedArray.push(wordOfTheDay.charAt(index));
