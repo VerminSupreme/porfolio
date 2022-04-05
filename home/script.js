@@ -20,7 +20,7 @@ const keyCodes = [
 ];
 const keyRow = document.createElement('array');
 
-window.addEventListener('keydown', keydown);
+window.addEventListener('keydown', keyboardKey);
 
 let c = 0;
 let u = 0;
@@ -49,8 +49,18 @@ for (let i = 0; i < keys.length; i++){
         keysByRow[j].classList.add('key');
         keysByRow[j].textContent = keys[i][j];
         keyRow[i].appendChild(keysByRow[j]);
+
+        keysByRow[j].addEventListener('click', (e) => {
+            keyIsPressed(e, keys[i][j], i, j);
+        });
     }
     keyboardContainer.appendChild(keyRow[i]);
+
+}
+
+function keyIsPressed(keyPressed, letterOfKey, i, j){
+    const valueOfKeyPressed = keyPressed.target.innerHTML;
+    keyDown(letterOfKey, keyCodes[i][j]);
 
 }
 
@@ -70,10 +80,14 @@ function isValidKey(val){
     }
 }
 
-function keydown(keyCode){
-    const key = keyCode.key;
-    const val = keyCode.keyCode;
-    
+function keyboardKey(keyPressedOnKeyboard){
+    const key = keyPressedOnKeyboard.key;
+    const val = keyPressedOnKeyboard.keyCode;
+    keyDown(key, val);
+}
+
+function keyDown(key, val){
+    console.log(key + val);
     if (isValidKey(val) == false){
         return;
     }    
@@ -110,10 +124,21 @@ function keydown(keyCode){
     }
 }
 
+function isCorrect(){
+
+}
+
+function isPartiallyCorrect(){
+
+}
+
 function checkWord(){
     let correctCount = 0;
     let exactCount = 0;
     let tempSolved = solved.slice();
+    
+
+    
     for (c = 4; c >= 0; c--){
         let value = arrHolder[u].childNodes[c].firstChild.innerHTML.toLowerCase();
         let correct = false;
@@ -156,7 +181,7 @@ function checkForWin(exactCount, correctCount){
 }
 
 function win(){
-    window.removeEventListener('keydown', keydown);
+    window.removeEventListener('keydown', keyDown);
     end.classList.toggle('hidden');
     let thing = document.createElement('h1');
     thing.textContent = 'It took ' + (u+1) + ' tries.';
@@ -165,7 +190,7 @@ function win(){
 }
 
 function lose(){
-    window.removeEventListener('keydown', keydown);
+    window.removeEventListener('keydown', keyDown);
     end.classList.toggle('hidden');
     page.classList.add('lose');
     endLose.classList.toggle('hidden');
