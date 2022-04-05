@@ -144,8 +144,8 @@
 
   .rowOfKeys{
       display: flex;
-      flex-direction: row;
       gap: 2px;
+
 
   }
   
@@ -155,6 +155,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+
   }
 
   .letterKey{
@@ -178,3 +179,8 @@
     gap: 25vw;
 }
 
+@media (max-width: 500px){
+    .letterKey{
+        width: 30px;
+    }
+}
