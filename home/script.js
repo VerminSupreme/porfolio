@@ -160,29 +160,42 @@ function checkWord(){
     let correctCount = 0;
     let exactCount = 0;
     let tempSolved = solved.slice();
-    
+    console.log(tempSolved);
 
-    
+    for (let c = 4; c >= 0; c--){
+        console.log(arrHolder[u].childNodes[c].textContent);
+        if (arrHolder[u].childNodes[c].textContent.toLowerCase() == tempSolved[c]){
+            arrHolder[u].childNodes[c].classList.add('fully-guessed');
+            updateKeyboard(arrHolder[u].childNodes[c].firstChild.innerHTML.toLowerCase(), 'green');
+
+            tempSolved[c] = '';
+            exactCount++;
+            console.log(tempSolved);
+        }    
+    }
+    console.log(tempSolved);
+
     for (c = 4; c >= 0; c--){
         let value = arrHolder[u].childNodes[c].firstChild.innerHTML.toLowerCase();
         let correct = false;
-        for (let j = 4; j >= 0; j--){
-            if (value == tempSolved[j]){
-                if (j == c){
-                    arrHolder[u].childNodes[c].classList.add('fully-guessed');
-                    updateKeyboard(value, 'green');
-                    correct = true;
-                    exactCount++;
-                }else{
-                    arrHolder[u].childNodes[c].classList.add('partial-guessed');
-                    updateKeyboard(value, 'yellow');
-                    correct = true;
-                }
-                tempSolved[j]="";
-                j=-1;
+        arrHolder[u].childNodes[c].classList.add('rotate-x');
+        console.log(tempSolved);
+        if (tempSolved[c] == ''){
+            correct = true;
+        }else{
+            console.log("going for it");
+            for (let j = 4; j >= 0; j--){
+                if (value == tempSolved[j]){
+                        arrHolder[u].childNodes[c].classList.add('partial-guessed');
+                        updateKeyboard(value, 'yellow');
+                        correct = true;
+                    }
+                    tempSolved[j]="";
+                
+                
             }
-             
         }
+
         if (correct == false){
             updateKeyboard(value, 'gray');
 
