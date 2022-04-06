@@ -169,10 +169,17 @@ function checkWord(){
     }
     console.log(tempSolved);
 
+
     for (c = 4; c >= 0; c--){
+        let number = (4-c);
+        
+        
+        rotate(c)
+
+        
+
         let value = arrHolder[u].childNodes[c].firstChild.innerHTML.toLowerCase();
         let correct = false;
-        arrHolder[u].childNodes[c].classList.add('rotate-x');
         if (arrHolder[u].childNodes[c].classList.contains('fully-guessed')){
             correct = true;
         }else{
@@ -202,6 +209,12 @@ function checkWord(){
     checkForWin(exactCount, correctCount);
 }
 
+function rotate(index){
+    setTimeout(() => {
+        arrHolder[u-1].childNodes[index].classList.add('rotate-x');
+    }, (index*100));
+}
+
 function checkForWin(exactCount, correctCount){
     if (exactCount == 5){
         win();
@@ -211,9 +224,19 @@ function checkForWin(exactCount, correctCount){
     }
 }
 
-function win(){
-    window.removeEventListener('keydown', keyDown);
+function removeEndScreen(){
+    end.classList.add('hidden');
+}
+
+function endgameEventListeners(){
+    window.removeEventListener('keydown', keyboardKey);
+    window.addEventListener('click', removeEndScreen);
     end.classList.toggle('hidden');
+
+}
+
+function win(){
+    endgameEventListeners();
     let thing = document.createElement('h1');
     thing.textContent = 'It took ' + (u+1) + ' tries.';
     endWin.appendChild(thing);
@@ -221,12 +244,9 @@ function win(){
 }
 
 function lose(){
-    window.removeEventListener('keydown', keyDown);
-    end.classList.toggle('hidden');
+    endgameEventListeners();
     page.classList.add('lose');
     endLose.classList.toggle('hidden');
-
-
 }
 
 function updateKeyboard(value, color){

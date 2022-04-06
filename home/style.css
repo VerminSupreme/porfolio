@@ -155,7 +155,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 1.0s ease;
 
   }
 
@@ -181,6 +180,7 @@
 }
 
 .rotate-x{
+    transition: transform 1s ease-out;
     transform: rotateX(360deg);
 }
 
