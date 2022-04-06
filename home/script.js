@@ -105,12 +105,10 @@ function isValidKey(val){
 function keyboardKey(keyPressedOnKeyboard){
     const key = keyPressedOnKeyboard.key;
     const val = keyPressedOnKeyboard.keyCode;
-    console.log("keyboardKey: " + key + val);
     keyDown(key, val);
 }
 
 function keyDown(key, val){
-    console.log("you clicked " + key + val);
     if (isValidKey(val) == false){
         return;
     }    
@@ -145,7 +143,6 @@ function keyDown(key, val){
 
         c++;
     }
-    console.log(1);
 }
 
 function isCorrect(){
@@ -160,17 +157,14 @@ function checkWord(){
     let correctCount = 0;
     let exactCount = 0;
     let tempSolved = solved.slice();
-    console.log(tempSolved);
 
     for (let c = 4; c >= 0; c--){
-        console.log(arrHolder[u].childNodes[c].textContent);
         if (arrHolder[u].childNodes[c].textContent.toLowerCase() == tempSolved[c]){
             arrHolder[u].childNodes[c].classList.add('fully-guessed');
             updateKeyboard(arrHolder[u].childNodes[c].firstChild.innerHTML.toLowerCase(), 'green');
 
             tempSolved[c] = '';
             exactCount++;
-            console.log(tempSolved);
         }    
     }
     console.log(tempSolved);
@@ -179,18 +173,18 @@ function checkWord(){
         let value = arrHolder[u].childNodes[c].firstChild.innerHTML.toLowerCase();
         let correct = false;
         arrHolder[u].childNodes[c].classList.add('rotate-x');
-        console.log(tempSolved);
-        if (tempSolved[c] == ''){
+        if (arrHolder[u].childNodes[c].classList.contains('fully-guessed')){
             correct = true;
         }else{
-            console.log("going for it");
+            console.log(tempSolved);
             for (let j = 4; j >= 0; j--){
                 if (value == tempSolved[j]){
                         arrHolder[u].childNodes[c].classList.add('partial-guessed');
                         updateKeyboard(value, 'yellow');
                         correct = true;
+                        tempSolved[j]="";
+
                     }
-                    tempSolved[j]="";
                 
                 
             }
