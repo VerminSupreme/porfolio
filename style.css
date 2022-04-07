@@ -34,14 +34,7 @@
     background-size: cover;
     background-attachment: fixed;
 }
-.second-page{
-    height: 100vh;
-    background: url(me.jpg);
-    background-position: center;
-    background-repeat: none;
-    background-size: cover;
-    background-attachment: fixed;
-}
+
 .first-page header{
     background: rgb(0,0,0,.5);
     display: flex;
@@ -83,4 +76,53 @@
 }
 .visibility-container:hover .visibility-unit{
     display: block;
+}
+
+#second-page{
+    position: relative;
+    height: 100vh;
+    background-position: center;
+    background-repeat: none;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.second-page-on{
+    background: #326085;
+}
+.second-page-off{
+    background: black;
+}
+.title1{
+    font-size: 2em;
+}
+.title2{
+    color: #326085;
+    font-size: 2em;
+}
+
+#switch-holder{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+}
+#switch-holder div{
+    height: 100px;
+    border: 1px solid black;
+    transition: width .2s;
+}
+.switchOn{
+    background: black;
+    width: 100px;
+
+}
+.switchOff{
+    width: 200px;
+    background: white;
 }
