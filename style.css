@@ -1,49 +1,62 @@
 *{
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-body{
+:root{
+    --main-color: #ffffff;
+    --secondary-color: rgb(0, 0, 0);
+}
 
+.first-page{
+    display: flex;
+    flex-direction: column;
     width: 100vw;
     height: 100vh;
-    background: gray;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 50px;
+    background: var(--main-color);
 }
-#title{
-    font-size: 3em;
-}
-#divider{
+.first-page header{
+    background: var(--secondary-color);
     display: flex;
-    flex-direction: column;
+    justify-content: flex-end;
     align-items: center;
-    justify-content: center;
-    height: 25vh;
-    width: 100vw;
-    border-bottom: 4px solid black;
+    padding: 0 20px;
+    width: 100%;
+    flex-basis: 60px;
+    gap: 20px;
 }
-#game-list{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 40vh;
+.first-page header a, .games{
+    text-decoration: none;
+    color: var(--main-color);
+    font-size: 1.8rem;
 }
-#game-list-title{
-    color: white;
-    font-size: 2.8rem;
-    padding-bottom: 20px;
+.first-page header a:hover, .games:hover{
+    color: rgb(0, 255, 26);
 }
 
-a{
-    text-decoration: none;
-    color: black;
-    font-size: 2rem;
+.games{
+    cursor: pointer;
 }
-a:hover{
-    color: white;
+
+#push-left{
+    margin-right: auto;
+}
+
+
+.visibility-container{
+    text-align: center;
+    background: black;
+    width: 100px;
+}
+.visibility-unit{
+    background: inherit;
+    display: none;
+    position: absolute;
+    padding: 10px;
+}
+.visibility-container:hover .visibility-unit{
+    display: block;
 }

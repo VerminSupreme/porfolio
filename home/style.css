@@ -8,7 +8,7 @@
 :root{
     --green: #32CD32;
     --yellow: yellow;
-    --gray: rgb(200, 200, 200);
+    --gray: rgb(183, 183, 183);
 }
 
 #grid-container{
@@ -67,7 +67,7 @@
 }
 
 .not-in-word{
-    background: rgb(200,200,200);
+    background: var(--gray);
 }
 
 
