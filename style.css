@@ -56,6 +56,8 @@
 
 .games{
     cursor: pointer;
+    flex-basis: 300px;
+    flex-shrink: 0;
 }
 
 #push-left{
@@ -125,4 +127,13 @@
 .switchOff{
     width: 200px;
     background: white;
+}
+
+@media (max-width: 500px){
+    .switchOff{
+        width: 150px;
+    }
+    .switchOn{
+        width: 75px;
+    }
 }
