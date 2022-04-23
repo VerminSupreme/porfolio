@@ -19,8 +19,8 @@ body{
     grid-template-rows: 1fr 2fr 2fr 2fr 2fr;
     grid-template-areas: 
         'h h h h'
-        'stats stats time time'
-        'stats stats actions actions'
+        'stats stats time buy'
+        'stats stats actions buy'
         'a a a a'
         'a a a a';
 }
@@ -75,6 +75,7 @@ header h1{
     font-weight: 900;
     font-size: 2em;
 }
+
 .displaySection{
     background: rgba(0,0,0,.1);
     border: 1px solid black;
@@ -84,7 +85,7 @@ header h1{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     padding: 10px;
 }
 #actions{
@@ -114,6 +115,10 @@ header h1{
 }
 #time h1{
     justify-content: center;
+}
+#buy{
+    grid-area: buy;
+    overflow-y: hidden;
 }
 #reset{
     position: absolute;

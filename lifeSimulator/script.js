@@ -1,13 +1,10 @@
 //reset 
 let resetButton = document.getElementById('reset');
 resetButton.addEventListener('click', resetStats);
+
 function resetStats(){
     localStorage.removeItem('initializedUser');
-    addPopUp();
-    generateNewData();
-    setCharacterData();
-    setClock();
-    saveData();
+    checkForPastSave();
 }
 
 
@@ -18,7 +15,7 @@ const clock = document.getElementById('clock');
 const dayCounter = document.getElementById('daysSinceGraduation');
 const workButton = document.getElementById('workButton');
 const saveDataButton = document.getElementById('saveData');
-
+const lastNames = document.getElementsByClassName('lastName');
 
 workButton.addEventListener('click', work);
 saveDataButton.addEventListener('click', saveData);
@@ -30,46 +27,70 @@ let health;
 let age;
 let time;
 let daysSinceGraduation;
+let job;
 
 
+let daysWorked = 0;
 
 
 checkForPastSave();
-setCharacterData();
-setClock();
-setWorkButton();
+updateAllData();
 
 
 
 function checkForPastSave(){
     if (localStorage.initializedUser == undefined){
-        generateNewData();
+        addPopUp();
     } else {
         loadPastData();
     }
 }
 
+function generateNewData(){
+    userName = 'Antony';
+    money = 0;
+    health = 100;
+    age = 18;
+    time = 0;
+    job = "Dog Walker";
+    daysSinceGraduation = 0;
+    hourlyWage = 10;
+    saveData();
+}
+
+function updateCharacterData(){
+    stats.children[0].innerText = `Name: ${userName}`;
+    stats.children[1].innerText = `Money: $${money}`;
+    stats.children[2].innerText = `Health: ${health}%`;
+    stats.children[3].innerText = `Age: ${age} years old`;
+    stats.children[4].innerText = `Job: ${job}`;
+}
+
+function updateClock(){
+    clock.innerText = `${time}:00`;
+    dayCounter.innerText = `${daysSinceGraduation} days since graduation`;
+}
+
+function setWorkButton(){
+    workButton.innerText = `+${hourlyWage}/hour`;
+}
+
 function beginGame(){
     removePopUp();
+    generateNewData();
+    updateAllData();
+    saveData();
 }
 
 function removePopUp(){
     introPopUp.classList.add('hidden');
+
 }
 function addPopUp(){
     introPopUp.classList.remove('hidden');
 }
 
-function generateNewData(){
-    userName = prompt('Enter Name');
-    money = 0;
-    health = 100;
-    age = 18;
-    time = 1;
-    daysSinceGraduation = 0;
-    hourlyWage = 10;
-    saveData();
-}
+
 
 function saveData(){
     setStorage('money', money);
@@ -80,6 +101,8 @@ function saveData(){
     setStorage('time', time);
     setStorage('daysSinceGraduation', daysSinceGraduation);
     setStorage('hourlyWage', hourlyWage);
+    setStorage('daysWorked', daysWorked);
+    setStorage('job', job);
 }
 
 function loadPastData(){
@@ -91,33 +114,30 @@ function loadPastData(){
     time = localStorage.time;
     daysSinceGraduation = localStorage.daysSinceGraduation;
     hourlyWage = localStorage.hourlyWage;
+    daysWorked = localStorage.daysWorked;
+    job = localStorage.job;
 }
 
-function setCharacterData(){
-    stats.children[0].innerHTML= `Name: ${userName}`;
-    stats.children[1].innerHTML= `Money: $${money}`;
-    stats.children[2].innerHTML=`Health: ${health}%`;
-    stats.children[3].innerHTML=`Age: ${age} years old`;
-}
 
-function setClock(){
-    clock.innerText = `${time}:00`;
-    dayCounter.innerText = `${daysSinceGraduation} days since graduation`;
-}
 
-function setWorkButton(){
-    workButton.innerText = `+${hourlyWage}`;
+
+
+function updateAllData(){
+    updateCharacterData();
+    updateClock();
+    setWorkButton();
 }
 
 function work(){
     money += +hourlyWage;
     time ++;
     if (time == 24){
-        time = 1;
+        time = 0;
         daysSinceGraduation++;
     }
-    setClock();   
-    setCharacterData(); 
+    updateClock();   
+    updateCharacterData(); 
+    daysWorked++;
 }
 
 
