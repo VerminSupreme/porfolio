@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="introPopUp" class="introPopUp">
+    <div id="introPopUp" class="introPopUp hidden">
         <h1>Don't disappoint your parents simulator</h1>
         <h2>By Yacktile Games</h2>
         <div id="divider">
@@ -35,14 +35,22 @@
             </p>
                 
         </div>
-        <button id="beginGame">Begin</button>
+        <a href="index.html" id="beginGame">Begin</a>
 
     </div>
     <header>
         <h1>Don't disappoint your parents simulator</h1>
     </header>
-    <div id="resetContainer">
-        <div id="reset">Reset</div>
+    <div id="settingsDropdownContainer">
+        <div id="settingsDropdown">
+            <p id="settingsButton">Settings</p>
+        </div>
+    </div>
+    <div id="settingsMenu" class=" settingsMenu hidden">
+        <p id="settingsMenuX">X</p>
+        <button id="saveData" class="button">Save</button>
+        <a href="index.html" id="reset" class="button">Reset</a>
+
     </div>    
     <div id='stats' class="displaySection">
         <h1 id="name"></h1>
@@ -50,11 +58,10 @@
         <h1 id="health"></h1>
         <h1 id="age"></h1>
         <h1 id="job"></h1>
-        <button id="saveData">Save</button>
     </div>
     <div id="actions" class="displaySection">
         <h1>Work</h1>
-        <button id="workButton"></button>
+        <button id="workButton" class="button"></button>
     </div>
     <div id="time" class="displaySection">
         <h1 id="clock"></h1>
@@ -62,21 +69,16 @@
     </div>
     <div id="buy" class="displaySection">
         <h1>Buy</h1>
-        <h1>1</h1>
-        <h1>1</h1>
-        <h1>1</h1>
-        <h1>1</h1>
-        <h1>1</h1>
-        <h1>1</h1>
-        <h1>1</h1>
-        <h1>1</h1>
-        <h1>1</h1>
-        <h1>1</h1>
-        <h1>1</h1>
-        <h1>1</h1>
-        <h1>1</h1>
-        <h1>1</h1>
-        <h1>1</h1>
+        <div id="purchaseOptions">
+            <button>Car $2500</button>      
+
+        </div>  
+    </div>
+    <div id="education">
+
+    </div>
+    <div id="careers">
+
     </div>
 </body>
 </html>

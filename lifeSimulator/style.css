@@ -24,7 +24,17 @@ body{
         'a a a a'
         'a a a a';
 }
-
+@media (max-width: 800px){
+    body{
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+            'h h'
+            'stats stats'
+            'stats stats'
+            'time buy'
+            'actions buy';
+    }
+}
 .introPopUp{
     display: flex;
     flex-direction: column;
@@ -38,13 +48,11 @@ body{
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,.9);
-    overflow-Y; scroll;
+    overflow-Y: scroll;
 
     padding: 20px;
 }
-.hidden{
-    display: none;
-}
+
 #introPopUp *{
     color: white;
 }
@@ -61,9 +69,13 @@ body{
 }
 #beginGame{
     background: black;
-    padding: 5px;
+    padding: 10px;
     margin-top: 20px;
     font-size: 1.5em;
+    cursor: pointer;
+    border: 1px solid white;
+    border-radius: 5px;
+    text-decoration: none;
 }
 header{
     grid-area: h;
@@ -95,13 +107,18 @@ header h1{
     justify-content: center;
     align-items: center;
 }
-#workButton{
+.button, #buy button{
     background: white;
     padding: 5px 40px;
+    border: 1px solid black;
     border-radius: 10px;
     box-shadow: 2px 2px black;
+    min-width: 150px;
+    font-size: 1rem;
+    text-align: center;
+
 }
-#workButton:active{
+.button:active, #buy button:active{
     background: rgb(240,240,240);
     transform: translate(2px, 2px);
     box-shadow: none;
@@ -114,29 +131,81 @@ header h1{
     align-items: center;
 }
 #time h1{
-    justify-content: center;
+    text-align: center;    
 }
 #buy{
     grid-area: buy;
-    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
 }
 #reset{
-    position: absolute;
-    background: white;
-    padding: 4px;
-    border-radius: 5px;
-    top: 0px;
-    right: 0px;
-    display: none;
+    
     cursor: pointer;
+    text-decoration: none;
+    color: black;
 }
-#resetContainer{
+
+#settingsDropdownContainer{
     position: absolute;
     top: 0;
     right: 0;
-    min-width: 10px;
-    min-height: 10px;
+    min-width: 80px;
+    height: 25px;
 }
-#resetContainer:hover #reset{
-    display: block;
+#settingsDropdownContainer:hover #settingsDropdown{
+    transform: translateY(0);
+
+}
+
+#settingsDropdown{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform .3s;
+    transform: translateY(-25px);
+
+    height: 30px;
+    
+    background: rgba(0,0,0,.2);
+    border: 1px solid black;
+    border-radius: 0 0 5px 5px;
+    border-top: 0px;
+}
+
+#settingsButton{
+    cursor: pointer;
+}
+.settingsMenu{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 400px;
+    background-color: var(--primaryColor);
+    border: 5px solid black;
+    border-radius: 5px;
+    gap: 10px;
+}
+#settingsMenuX{
+    font-weight: 900;
+    cursor: pointer;
+    position: absolute;
+    right: 0px;
+    padding: 0 5px;
+    top: 0px;
+    border-left: 3px solid black;
+    border-bottom: 3px solid black;
+
+}
+
+.hidden{
+    display: none;
 }

@@ -1,0 +1,9 @@
+1. Add a separate page for sign up,
+this would let you enter your name
+and would push data to the
+actual game page.
+
+2. Use visual bars to show levels for
+different needs or skills
+
+3. Tax day countdown. Shows amount owed and days until owed. Debt leads to loss.

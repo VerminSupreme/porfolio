@@ -10,16 +10,28 @@ function resetStats(){
 
 const beginGameButton = document.getElementById('beginGame');
 const introPopUp = document.getElementById('introPopUp');
+
 const stats = document.getElementById('stats');
 const clock = document.getElementById('clock');
+const purchaseOptions = document.getElementById('purchaseOptions');
+
+
 const dayCounter = document.getElementById('daysSinceGraduation');
 const workButton = document.getElementById('workButton');
 const saveDataButton = document.getElementById('saveData');
-const lastNames = document.getElementsByClassName('lastName');
+const settingsButton = document.getElementById('settingsButton');
+const settingsMenu = document.getElementById('settingsMenu');
+const settingsMenuX = document.getElementById('settingsMenuX');
 
 workButton.addEventListener('click', work);
 saveDataButton.addEventListener('click', saveData);
 beginGameButton.addEventListener('click', beginGame);
+settingsButton.addEventListener('click', toggleSettingsMenu);
+settingsMenuX.addEventListener('click', toggleSettingsMenu);
+
+for (let i = 0; i < purchaseOptions.childElementCount; i++){
+        purchaseOptions.children[i].addEventListener('click', purchase);
+}
 
 let userName;
 let money;
@@ -28,7 +40,7 @@ let age;
 let time;
 let daysSinceGraduation;
 let job;
-
+let items;
 
 let daysWorked = 0;
 
@@ -43,6 +55,8 @@ function checkForPastSave(){
         addPopUp();
     } else {
         loadPastData();
+        removePopUp();
+        removePurchasedButtons();
     }
 }
 
@@ -55,6 +69,7 @@ function generateNewData(){
     job = "Dog Walker";
     daysSinceGraduation = 0;
     hourlyWage = 10;
+    items = "00000";
     saveData();
 }
 
@@ -71,7 +86,7 @@ function updateClock(){
     dayCounter.innerText = `${daysSinceGraduation} days since graduation`;
 }
 
-function setWorkButton(){
+function updateWorkButton(){
     workButton.innerText = `+${hourlyWage}/hour`;
 }
 
@@ -82,9 +97,16 @@ function beginGame(){
     saveData();
 }
 
+function removePurchasedButtons(){
+    for (let i = 0; i < purchaseOptions.childElementCount; i++){
+        if (items.charAt(i) == 1){
+            purchaseOptions.children[i].classList.add('hidden');
+        }
+    }
+}
+
 function removePopUp(){
     introPopUp.classList.add('hidden');
-
 }
 function addPopUp(){
     introPopUp.classList.remove('hidden');
@@ -103,10 +125,10 @@ function saveData(){
     setStorage('hourlyWage', hourlyWage);
     setStorage('daysWorked', daysWorked);
     setStorage('job', job);
+    setStorage('items', items);
 }
 
 function loadPastData(){
-    removePopUp();
     userName = localStorage.name;
     money = +localStorage.money;
     health = localStorage.health;
@@ -116,16 +138,36 @@ function loadPastData(){
     hourlyWage = localStorage.hourlyWage;
     daysWorked = localStorage.daysWorked;
     job = localStorage.job;
+    items = localStorage.items
 }
 
 
 
-
+function purchase(item){
+    let itemPrice = item.target.innerText;
+    let itemName;
+    for (let i = 0; i < itemPrice.length; i++){
+        if (itemPrice.charAt(i) == '$'){
+            itemName = itemPrice.substr(0, i-1);
+            itemPrice = itemPrice.substr(i+1);
+            break;
+        }
+    }
+    if (money >= +itemPrice){
+        money -= +itemPrice;
+        item.target.classList.add('hidden');
+        
+        switch (itemName){
+            case 'Car':
+                items = "1" + items.substr(1);
+        }
+    }
+}
 
 function updateAllData(){
     updateCharacterData();
     updateClock();
-    setWorkButton();
+    updateWorkButton();
 }
 
 function work(){
@@ -143,4 +185,8 @@ function work(){
 
 function setStorage(location, data){
     localStorage.setItem(location, data);
+}
+
+function toggleSettingsMenu(){
+    settingsMenu.classList.toggle('hidden');
 }
