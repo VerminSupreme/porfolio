@@ -1,3 +1,6 @@
+checkForPastSave();
+updateAllData();
+
 //reset 
 let resetButton = document.getElementById('reset');
 resetButton.addEventListener('click', resetStats);
@@ -45,8 +48,7 @@ let items;
 let daysWorked = 0;
 
 
-checkForPastSave();
-updateAllData();
+
 
 
 
