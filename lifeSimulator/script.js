@@ -1,5 +1,4 @@
-checkForPastSave();
-updateAllData();
+
 
 //reset 
 let resetButton = document.getElementById('reset');
@@ -36,6 +35,8 @@ for (let i = 0; i < purchaseOptions.childElementCount; i++){
         purchaseOptions.children[i].addEventListener('click', purchase);
 }
 
+
+
 let userName;
 let money;
 let health;
@@ -44,10 +45,39 @@ let time;
 let daysSinceGraduation;
 let job;
 let items;
+let hourlyWage;
 
 let daysWorked = 0;
 
+checkForPastSave();
+updateAllData();
 
+function saveData(){
+    setStorage('money', money);
+    setStorage('userName', userName);
+    setStorage('health', health);
+    setStorage('age', age);
+    setStorage('initializedUser', '');
+    setStorage('time', time);
+    setStorage('daysSinceGraduation', daysSinceGraduation);
+    setStorage('hourlyWage', hourlyWage);
+    setStorage('daysWorked', daysWorked);
+    setStorage('job', job);
+    setStorage('items', items);
+}
+
+function loadPastData(){
+    userName = localStorage.userName;
+    money = +localStorage.money;
+    health = localStorage.health;
+    age = localStorage.age;
+    time = localStorage.time;
+    daysSinceGraduation = localStorage.daysSinceGraduation;
+    hourlyWage = localStorage.hourlyWage;
+    daysWorked = localStorage.daysWorked;
+    job = localStorage.job;
+    items = localStorage.items
+}
 
 
 
@@ -116,32 +146,7 @@ function addPopUp(){
 
 
 
-function saveData(){
-    setStorage('money', money);
-    setStorage('name', userName);
-    setStorage('health', health);
-    setStorage('age', age);
-    setStorage('initializedUser', '');
-    setStorage('time', time);
-    setStorage('daysSinceGraduation', daysSinceGraduation);
-    setStorage('hourlyWage', hourlyWage);
-    setStorage('daysWorked', daysWorked);
-    setStorage('job', job);
-    setStorage('items', items);
-}
 
-function loadPastData(){
-    userName = localStorage.name;
-    money = +localStorage.money;
-    health = localStorage.health;
-    age = localStorage.age;
-    time = localStorage.time;
-    daysSinceGraduation = localStorage.daysSinceGraduation;
-    hourlyWage = localStorage.hourlyWage;
-    daysWorked = localStorage.daysWorked;
-    job = localStorage.job;
-    items = localStorage.items
-}
 
 
 
@@ -162,8 +167,14 @@ function purchase(item){
         switch (itemName){
             case 'Car':
                 items = "1" + items.substr(1);
+                purchaseCar();
+                break;
         }
     }
+}
+
+function purchaseCar(){
+
 }
 
 function updateAllData(){
