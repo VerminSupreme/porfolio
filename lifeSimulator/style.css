@@ -19,7 +19,7 @@ body{
     grid-template-rows: 1fr 2fr 2fr 2fr 2fr;
     grid-template-areas: 
         'h h h h'
-        'stats stats time buy'
+        'stats stats time daylightHours'
         'stats stats actions buy'
         'a a a a'
         'a a a a';
@@ -31,7 +31,7 @@ body{
             'h h'
             'stats stats'
             'stats stats'
-            'time buy'
+            'time daylightHours'
             'actions buy';
     }
 }
@@ -142,6 +142,13 @@ header h1{
     flex-direction: column;
     align-items: center;
     overflow-y: scroll;
+}
+#daylightHours{
+    grid-area: daylightHours;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 #reset{
     

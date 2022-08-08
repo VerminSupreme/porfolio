@@ -11,3 +11,12 @@ function flipSwitch(){
     secondPage.classList.toggle('second-page-on');
     secondPage.classList.toggle('second-page-off');
 }
+ 
+const sliderHolder = document.getElementById('sliderHolder');
+const sliderSlider = document.getElementById('sliderSlider');
+
+sliderHolder.addEventListener('click', sliderClicked);
+
+function sliderClicked(){
+    sliderSlider.classList.toggle('slide');
+}

@@ -24,6 +24,7 @@ const saveDataButton = document.getElementById('saveData');
 const settingsButton = document.getElementById('settingsButton');
 const settingsMenu = document.getElementById('settingsMenu');
 const settingsMenuX = document.getElementById('settingsMenuX');
+const daylightHoursCounter = document.getElementById('daylightHours');
 
 workButton.addEventListener('click', work);
 saveDataButton.addEventListener('click', saveData);
@@ -46,6 +47,8 @@ let daysSinceGraduation;
 let job;
 let items;
 let hourlyWage;
+let dayStart;
+let dayEnd;
 
 let daysWorked = 0;
 
@@ -102,6 +105,8 @@ function generateNewData(){
     daysSinceGraduation = 0;
     hourlyWage = 10;
     items = "00000";
+    dayStart = 8;
+    dayEnd = 22;
     saveData();
 }
 
@@ -174,7 +179,7 @@ function purchase(item){
 }
 
 function purchaseCar(){
-
+    
 }
 
 function updateAllData(){
